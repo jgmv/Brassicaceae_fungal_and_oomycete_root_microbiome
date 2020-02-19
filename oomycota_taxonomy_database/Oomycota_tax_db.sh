@@ -47,4 +47,8 @@ sed -i 's/ /_/g' oomycota.tax
 sed -i ':a;N;$!ba;s/.\n/\n/g' oomycota.tax
 
 
+### manually edit 'oomycota.tax'.
+### save definitive files as 'oomycota_refs.tax' and oomycota_refs.fasta
+
+
 ### end
