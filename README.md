@@ -1,0 +1,2 @@
+# Brassicaceae_fungal_and_oomycete_root_microbiome
+Data and code for the process of sequence data and data analysis of [Maciá-Vicente, Nam, Thines (2020) Community sequencing on a natural experiment reveals little influence of host species and timing but a strong influence of compartment on the composition of root endophytes in three annual Brassicaceae. BiorXiv, 10.1101/2020.01.24.918177](https://doi.org/10.1101/2020.01.24.918177)
