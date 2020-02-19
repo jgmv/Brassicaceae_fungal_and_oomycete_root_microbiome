@@ -34,7 +34,7 @@ fetch_gb.py oomycota.gi -o oomycota.gb
 get_metadata_from_gb.py oomycota.gb -o oomycota.csv
 
 # extract sequences from GB
-get_fasta_from_gb.py
+get_fasta_from_gb.py -o oomycota.fasta oomycota.gb
 
 # extract taxonomy from GB
 sed -n -e '/ORGANISM/,/REFERENCE/ p' oomycota.gb > oomycota.tax
