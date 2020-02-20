@@ -3,10 +3,10 @@ Data and code for the process of sequence data and data analyses used in [Maciá
 
 ## Contents
 ### oomycota_taxonomy_database
-Code to generate a database of *coxII* gene sequence data from NCBI GenBank, for its use as a reference in the identification of oomycete sequences. The file `oomycota_20190626.gi` provided contains GenBank GI numbers for the sequence records used for the publication (fetched on 2020-06-26).
+Code to generate a database of *coxII* gene sequence data from NCBI GenBank, for its use as a reference in the identification of oomycete sequences. The file `oomycota_20190626.gi` provided contains GenBank GI numbers for the sequence records used in the paper (fetched on 2020-06-26).
 
 ### ASVs_identification
-Data and code to identify MiSeq sequence data using the Naïve Bayesian Classifier tool [(Wang et al. 2007)](https://doi.org/10.1128/AEM.00062-07) implemented in mothur [(Schloss et al. 2009)](https://doi.org/10.1128/AEM.01541-09). Identifications are based on comparisons of fungal ITS sequences against records in the [UNITE](https://unite.ut.ee/) database of reference ITS sequences [(Kõljalg et al. 2005)](https://doi.org/10.1111/j.1469-8137.2005.01376.x), and of oomycete *coxII* sequences against the inhouse database produced [above](https://github.com/jgmv/Brassicaceae_fungal_and_oomycete_root_microbiome/tree/master/oomycota_taxonomy_database).
+Data and code to identify MiSeq sequence data using the Naïve Bayesian Classifier tool [(Wang et al. 2007)](https://doi.org/10.1128/AEM.00062-07) implemented in mothur [(Schloss et al. 2009)](https://doi.org/10.1128/AEM.01541-09). Identifications are based on comparisons of fungal ITS sequences against records in the [UNITE](https://unite.ut.ee/) database of reference ITS sequences [(Kõljalg et al. 2005)](https://doi.org/10.1111/j.1469-8137.2005.01376.x), and of oomycete *coxII* sequences against the inhouse database described [above](https://github.com/jgmv/Brassicaceae_fungal_and_oomycete_root_microbiome/tree/master/oomycota_taxonomy_database).
 
 ### data_analysis
 Data and code for the statistical analyses in R. The following R packages are required: `DESeq`,`emdbook`,`gplots`,`Hmisc`,`MASS`,`RColorBrewer`, and `vegan`.
