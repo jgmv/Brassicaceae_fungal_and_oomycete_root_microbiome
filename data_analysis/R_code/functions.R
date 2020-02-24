@@ -585,6 +585,24 @@ number_of_taxa <- function(tax, taxlevel = "order") {
 }
 
 
+### significance of taxa occurrence across compartments ------------------------
+taxa_across_compartments <- function(cdm, sam, tax, taxlevel = "order",
+  outfile = "orders_per_compartment.csv") {
+  cdm <- t(apply(cdm, 1, function(x) tapply(x, tax[, taxlevel], FUN = sum)))
+  sig <- as.data.frame(matrix(ncol = 4, nrow = ncol(cdm),
+    dimnames = list(colnames(cdm), c("H", "df", "p", "p.adj"))))
+  sig$H <- apply(cdm, 2,
+    function(x) kruskal.test(x, sam$compartment)$statistic)
+  sig$df <- apply(cdm, 2,
+    function(x) kruskal.test(x, sam$compartment)$parameter)
+  sig$p <- apply(cdm, 2,
+    function(x) kruskal.test(x, sam$compartment)$p.value)
+  sig$p.adj <- p.adjust(sig$p, method = "bon")
+  write.table(sig, paste0("output/", outfile), sep = ";", col.names = NA)
+  return(sig)
+}
+
+
 ### calculate differential ASV abundance across compartments with LR tests -----
 dif_abund <- function(cdm, data) {
   require(MASS)

@@ -189,21 +189,6 @@ reads_per_taxa(cdm_vs_fu, tax_vs_fu, "phylum",
 reads_per_taxa(cdm_vs_oo, tax_vs_oo, outfile = "orders_overall_oo.pdf")
 
 # significance of order distribution across compartments
-taxa_across_compartments <- function(cdm, sam, tax, taxlevel = "order",
-  outfile = "orders_per_compartment.csv") {
-  cdm <- t(apply(cdm, 1, function(x) tapply(x, tax[, taxlevel], FUN = sum)))
-  sig <- as.data.frame(matrix(ncol = 4, nrow = ncol(cdm),
-    dimnames = list(colnames(cdm), c("H", "df", "p", "p.adj"))))
-  sig$H <- apply(cdm, 2,
-    function(x) kruskal.test(x, sam$compartment)$statistic)
-  sig$df <- apply(cdm, 2,
-    function(x) kruskal.test(x, sam$compartment)$parameter)
-  sig$p <- apply(cdm, 2,
-    function(x) kruskal.test(x, sam$compartment)$p.value)
-  sig$p.adj <- p.adjust(sig$p, method = "bon")
-  write.table(sig, paste0("output/", outfile), sep = ";", col.names = NA)
-  return(sig)
-}
 order_sig_fu <- taxa_across_compartments(cdm_vs_fu, sample_vs_fu, tax_vs_fu,
   outfile = "orders_per_compartment_fu.csv")
 order_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
