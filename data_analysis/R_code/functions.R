@@ -442,7 +442,7 @@ calculate_dbRDAs_per_compartment <- function(dists, cdm, sam,
     names(cp$aov_var_expl) <- c("Species", "Date", "Residuals")
     assign(paste(outfile_pattern, i, sep = "_"), cp, envir = globalenv())
     pdf(paste0("output/", outfile_pattern, "_", i, ".pdf"), w = 8, h = 8,
-      , pointsize = 36)
+      pointsize = 36)
     par(mar = c(4, 4, 1, 1), las = 1, lwd = 3)
     plot_cap(cp, cp$expl)
     dev.off()
