@@ -22,7 +22,7 @@ cdm_raw <- cdm_raw[as.character(samples$sequencing_library), ]
 rownames(cdm_raw) <- samples$sample
 
 
-### summarize number of reads per kigdom
+### summarize number of reads per kingdom
 n_reads <- t(apply(cdm_raw, 1, function(x) tapply(x, tax_raw$kingdom, sum)))
 n_reads <- as.data.frame(colSums(n_reads))
 n_reads$perc <- n_reads[, 1] * 100 / sum(n_reads)
