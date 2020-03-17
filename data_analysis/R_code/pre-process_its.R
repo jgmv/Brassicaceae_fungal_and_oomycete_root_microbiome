@@ -22,6 +22,15 @@ cdm_raw <- cdm_raw[as.character(samples$sequencing_library), ]
 rownames(cdm_raw) <- samples$sample
 
 
+### summarize number of reads per kigdom
+n_reads <- t(apply(cdm_raw, 1, function(x) tapply(x, tax_raw$kingdom, sum)))
+n_reads <- as.data.frame(colSums(n_reads))
+n_reads$perc <- n_reads[, 1] * 100 / sum(n_reads)
+colnames(n_reads) <- c("reads", "perc")
+write.table(n_reads, "pre-processed_data/summary_reads_its.csv", sep = ";",
+  col.names = NA)
+
+
 ### check and remove negative controls
 nc <- cdm_raw[grep("H2O", rownames(cdm_raw)), ]
 nc <- nc[, colSums(nc) > 0]
