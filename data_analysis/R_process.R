@@ -175,12 +175,16 @@ number_of_taxa(tax_vs_fu)
 number_of_taxa(tax_vs_oo)
 
 # barplots with proportion of taxa
+cdm_genus_fu <- taxon_barplot(cdm_vs_fu, sample_vs_fu, taxlevel = "genus",
+  tax_vs_fu, n = 60, outfile = "genus_sample_fu.pdf")
 cdm_order_fu <- taxon_barplot(cdm_vs_fu, sample_vs_fu, tax_vs_fu, n = 15, 
   outfile = "orders_sample_fu.pdf")
-cdm_order_oo <- taxon_barplot(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
-  outfile = "orders_sample_oo.pdf")
 cdm_phylum_fu <- taxon_barplot(cdm_vs_fu, sample_vs_fu, tax_vs_fu,
   taxlevel = "phylum", n = 10, outfile = "phylum_sample_fu.pdf")
+cdm_genus_oo <- taxon_barplot(cdm_vs_oo, sample_vs_oo, taxlevel = "genus",
+  tax_vs_oo, n = 16, outfile = "genus_sample_oo.pdf")
+cdm_order_oo <- taxon_barplot(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
+  outfile = "orders_sample_oo.pdf")
 
 # distribution of reads across taxa
 reads_per_taxa(cdm_vs_fu, tax_vs_fu, outfile = "orders_overall_fu.pdf")
@@ -188,9 +192,13 @@ reads_per_taxa(cdm_vs_fu, tax_vs_fu, "phylum",
   outfile = "phylum_overall_fu.pdf")
 reads_per_taxa(cdm_vs_oo, tax_vs_oo, outfile = "orders_overall_oo.pdf")
 
-# significance of order distribution across compartments
+# significance of taxa distribution across compartments
+genus_sig_fu <- taxa_across_compartments(cdm_vs_fu, sample_vs_fu, tax_vs_fu,
+  taxlevel = "genus", outfile = "genus_per_compartment_fu.csv")
 order_sig_fu <- taxa_across_compartments(cdm_vs_fu, sample_vs_fu, tax_vs_fu,
   outfile = "orders_per_compartment_fu.csv")
+genus_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
+  taxlevel = "genus", outfile = "genus_per_compartment_oo.csv")
 order_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
   outfile = "orders_per_compartment_oo.csv")
 
