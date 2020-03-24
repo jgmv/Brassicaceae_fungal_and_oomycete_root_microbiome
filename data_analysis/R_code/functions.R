@@ -656,6 +656,22 @@ dif_abund <- function(cdm, data) {
 }
 
 
+### Venn diagram with shared ASVs per compartment ------------------------------
+shared_ASVs <- function(cdm, sam, filename = "venn") {
+  require(gplots)
+  asv <- sapply(as.character(unique(sam$compartment)), function(x) NULL)
+  for(i in names(asv)) {
+    cdm_temp <- cdm[sam$compartment == i, ]
+    cdm_temp <- cdm_temp[, colSums(cdm_temp) > 0]
+    asv[[i]] <- colnames(cdm_temp)
+  }
+  pdf(paste0("output/", filename, ".pdf"), w = 8, h = 8, pointsize = 12)
+  venn(asv, names = c("Root", "Endosphere", "Rhizosphere", "Bulk soil",
+    "Root zone soil"), small = 1)
+  dev.off()
+}
+
+
 ### enrichment analysis --------------------------------------------------------
 enrichment_analysis <- function(cdm, sam, tax, cdm_order, p_cutoff = 0.01,
   outfile = "dif_abund_fu") {
