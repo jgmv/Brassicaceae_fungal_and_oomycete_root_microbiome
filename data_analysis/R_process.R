@@ -202,20 +202,9 @@ genus_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
 order_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
   outfile = "orders_per_compartment_oo.csv")
 
-shared_ASVs <- function(cdm, sam, filename = "venn") {
-  require(gplots)
-  asv <- sapply(as.character(unique(sam$compartment)), function(x) NULL)
-  for(i in names(asv)) {
-    cdm_temp <- cdm[sam$compartment == i, ]
-    cdm_temp <- cdm_temp[, colSums(cdm_temp) > 0]
-    asv[[i]] <- colnames(cdm_temp)
-  }
-  pdf(paste0("output/", filename, ".pdf"))
-  plot(venn(asv), names = c("Root", "Endosphere", "Rhizosphere", "Bulk soil",
-    "Root zone soil"))
-  dev.off()
-}
-shared_ASVs(cdm_vs_fu, sample_vs_fu)
+### co-occurrence of ASVs across compartments
+shared_ASVs(cdm_vs_fu, sample_vs_fu, filename = "shared_ASVs_fu")
+shared_ASVs(cdm_vs_oo, sample_vs_oo, filename = "shared_ASVs_oo")
 
 ### enrichment of ASVs across compartments
 enrichment_analysis(cdm_fu, sample_fu, tax_fu, cdm_order_fu,
