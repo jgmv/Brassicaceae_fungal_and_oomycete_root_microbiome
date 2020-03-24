@@ -202,9 +202,11 @@ genus_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
 order_sig_oo <- taxa_across_compartments(cdm_vs_oo, sample_vs_oo, tax_vs_oo,
   outfile = "orders_per_compartment_oo.csv")
 
+
 ### co-occurrence of ASVs across compartments
 shared_ASVs(cdm_vs_fu, sample_vs_fu, filename = "shared_ASVs_fu")
 shared_ASVs(cdm_vs_oo, sample_vs_oo, filename = "shared_ASVs_oo")
+
 
 ### enrichment of ASVs across compartments
 enrichment_analysis(cdm_fu, sample_fu, tax_fu, cdm_order_fu,
