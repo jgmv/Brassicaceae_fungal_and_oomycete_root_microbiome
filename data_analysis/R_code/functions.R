@@ -45,7 +45,7 @@ color <- function(n, start = 1, random = F, last_gray = T) {
   require(RColorBrewer)
   
   # 433 colors
-  # x <- grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+  #x <- grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
   
   # 74 colors
   qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
@@ -588,16 +588,32 @@ number_of_taxa <- function(tax, taxlevel = "order") {
 ### significance of taxa occurrence across compartments ------------------------
 taxa_across_compartments <- function(cdm, sam, tax, taxlevel = "order",
   outfile = "orders_per_compartment.csv") {
-  cdm <- t(apply(cdm, 1, function(x) tapply(x, tax[, taxlevel], FUN = sum)))
-  sig <- as.data.frame(matrix(ncol = 4, nrow = ncol(cdm),
-    dimnames = list(colnames(cdm), c("H", "df", "p", "p.adj"))))
-  sig$H <- apply(cdm, 2,
+  cdm_temp <- t(apply(cdm, 1, function(x) tapply(x, tax[, taxlevel],
+    FUN = sum)))
+  sig <- as.data.frame(matrix(ncol = 4, nrow = ncol(cdm_temp),
+    dimnames = list(colnames(cdm_temp), c("H", "df", "p", "p.adj"))))
+  sig$H <- apply(cdm_temp, 2,
     function(x) kruskal.test(x, sam$compartment)$statistic)
-  sig$df <- apply(cdm, 2,
+  sig$df <- apply(cdm_temp, 2,
     function(x) kruskal.test(x, sam$compartment)$parameter)
-  sig$p <- apply(cdm, 2,
+  sig$p <- apply(cdm_temp, 2,
     function(x) kruskal.test(x, sam$compartment)$p.value)
   sig$p.adj <- p.adjust(sig$p, method = "bon")
+  for(i in unique(sam$compartment)) {
+    sam_temp <- droplevels(sam[sam$compartment == i, ])
+    cdm_temp <- cdm[rownames(sam_temp), ]
+    cdm_temp <- cdm_temp[, colSums(cdm_temp) > 0]
+    tax_temp <- droplevels(tax[colnames(cdm_temp), ])
+    sig[, i] <- rep(0, nrow(sig))
+    sig[, paste0(i, "_sd")] <- rep(0, nrow(sig))
+    x <- tapply(colSums(cdm_temp), tax_temp[, taxlevel], mean)
+    s <- tapply(colSums(cdm_temp), tax_temp[, taxlevel], sd)
+    for(j in names(x)) {
+      sig[j, i] <- x[j]
+      sig[j, paste0(i, "_sd")] <- s[j]
+    }    
+  }
+  sig[, 5:14][is.na(sig[, 5:14])] <- 0
   write.table(sig, paste0("output/", outfile), sep = ";", col.names = NA)
   return(sig)
 }
