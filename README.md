@@ -1,5 +1,5 @@
 # Brassicaceae_fungal_and_oomycete_root_microbiome
-Data and code for the process of sequence data and data analyses used in [Maciá-Vicente, Nam, Thines (2020) Community sequencing on a natural experiment reveals little influence of host species and timing but a strong influence of compartment on the composition of root endophytes in three annual Brassicaceae. BiorXiv, 10.1101/2020.01.24.918177](https://doi.org/10.1101/2020.01.24.918177).
+Data and code for the process of sequence data and data analyses used in [Maciá-Vicente, Nam, Thines (2020) Root filtering, rather than host identity or age, determines the composition of root-associated fungi and oomycetes in three naturally co-occurring Brassicaceae. Soil Biology & Biochemistry, 146:107806](https://doi.org/10.1016/j.soilbio.2020.107806).
 
 ## Contents
 ### oomycota_taxonomy_database
